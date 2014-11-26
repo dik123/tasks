@@ -10,10 +10,10 @@
 */
 
 function solve(Array $list) {
-    $list_length = count($list);
+    $listLength = count($list);
 
     /**
-    * Index of element positions.
+    * Index of elements positions.
     * Example: for array('a', 'b', 'a', 'c') will contain:
     * Array( 
     *    'a' => Array(0, 2),
@@ -27,7 +27,7 @@ function solve(Array $list) {
     $start  = 0;
 
     //Length of longest repeated subset in array
-    $max_length = 0;
+    $maxLength = 0;
 
     foreach($list as $pos => $item){
 
@@ -35,39 +35,39 @@ function solve(Array $list) {
            //Position's index for this element exists and we are going to
            //iterate throw all previews positions of element in array
 
-            $item_index = &$index[$item];
-            foreach($item_index as $index_pos){
-                $cursor_pos = $pos;
+            $itemIndex = &$index[$item];
+            foreach($itemIndex as $indexPos){
+                $cursorPos = $pos;
 
                 //Compare elements starting from indexed position with
                 //elements starting from current position
                 do{
-                    $cursor_pos++;
-                    $index_pos++;
+                    $cursorPos++;
+                    $indexPos++;
                 }while(
-                    $cursor_pos < $list_length
-                 && $list[$cursor_pos] == $list[$index_pos]);
+                    $cursorPos < $listLength
+                 && $list[$cursorPos] == $list[$indexPos]);
 
-               $cursor_length = $cursor_pos - $pos;
+               $cursorLength = $cursorPos - $pos;
 
                //If compare loop ends on out of array then
-               //$cursor_pos is longer by one  becase of do..while loop
-               //so $cursor_length must be decremented
-               if($cursor_pos == $list_length) $cursor_length--;
+               //$cursorPos is longer by one  becase of do..while loop
+               //so $cursorLength must be decremented
+               if($cursorPos == $listLength) $cursorLength--;
 
-               if($cursor_length > $max_length){
-                    $max_length = $cursor_length;
+               if($cursorLength > $maxLength){
+                    $maxLength = $cursorLength;
                     $start = $pos;
                 }
             }
 
             //Add current element's posision to index
-            $item_index[] = $pos;
+            $itemIndex[] = $pos;
         }else{
             //Initilize index for this element
             $index[$item] = array( $pos );
         }
     }
 
-    return  $max_length ? array_slice($list, $start, $max_length) : array();
+    return  $maxLength ? array_slice($list, $start, $maxLength) : array();
 }
