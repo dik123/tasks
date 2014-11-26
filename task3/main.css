@@ -60,6 +60,7 @@ body{
   border: 1px solid lightblue;
   background-color: #fff;
   z-index: 1001;
+  display: none;
 }
 
 #calendar-dialog .buttons{
