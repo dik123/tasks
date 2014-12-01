@@ -46,14 +46,9 @@ function solve(Array $list) {
                     $indexPos++;
                 }while(
                     $cursorPos < $listLength
-                 && $list[$cursorPos] == $list[$indexPos]);
+                 && $list[$cursorPos] === $list[$indexPos]);
 
                $cursorLength = $cursorPos - $pos;
-
-               //If compare loop ends on out of array then
-               //$cursorPos is longer by one  becase of do..while loop
-               //so $cursorLength must be decremented
-               if($cursorPos == $listLength) $cursorLength--;
 
                if($cursorLength > $maxLength){
                     $maxLength = $cursorLength;
