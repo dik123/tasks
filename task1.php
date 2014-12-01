@@ -14,11 +14,12 @@ function solve(Array $list) {
 
     /**
     * Index of elements positions.
-    * Example: for array('a', 'b', 'a', 'c') will contain:
+    * Example: for array('a', 'b', 'a', 'c', 1) will contain:
     * Array( 
-    *    'a' => Array(0, 2),
-    *    'b' => Array(1),
-    *    'c' => Array(3)
+    *    'a.string'  => Array(0, 2),
+    *    'b.string'  => Array(1),
+    *    'c.string'  => Array(3),
+    *    '1.integer' => Array(4)
     * )
     */
     $index  = array();
@@ -30,6 +31,9 @@ function solve(Array $list) {
     $maxLength = 0;
 
     foreach($list as $pos => $item){
+        // Append type name to index name becase of 
+        // keys in array are auto converted to string 
+        $item .= '.'.gettype($item);
 
         if( isset($index[$item])){
            //Position's index for this element exists and we are going to
@@ -46,6 +50,7 @@ function solve(Array $list) {
                     $indexPos++;
                 }while(
                     $cursorPos < $listLength
+                 && $indexPos  < $pos
                  && $list[$cursorPos] === $list[$indexPos]);
 
                $cursorLength = $cursorPos - $pos;
